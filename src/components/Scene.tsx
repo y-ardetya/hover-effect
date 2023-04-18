@@ -1,13 +1,29 @@
 import { Canvas } from "@react-three/fiber";
+import { Text } from "@react-three/drei";
 import { Photos } from "./PaperPlanes/Photos";
-import { Photo } from "./PaperPlanes/Photo";
+import { useLayoutEffect } from "react";
+// @ts-ignore
+import { Gradient } from "./Gradient";
 
 const Scene = () => {
+  useLayoutEffect(() => {
+    const gradient = new Gradient();
+    gradient.initGradient("#gradient-canvas");
+  }, []);
   return (
-    <Canvas style={{ width: "100vw", height: "100vh" }}>
-      <color attach="background" args={["#000000"]} />
-      <Photos />
-    </Canvas>
+    <>
+      <canvas id="gradient-canvas" data-transition-in />
+      <Canvas
+        style={{
+          width: "100vw",
+          height: "100vh",
+          position: "fixed",
+        }}
+      >
+        <Photos />
+        <Text>SHEEEEEESH</Text>
+      </Canvas>
+    </>
   );
 };
 

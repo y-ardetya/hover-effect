@@ -2,8 +2,7 @@ import { useTexture } from "@react-three/drei";
 import { memo, useMemo, useRef, useState } from "react";
 import { Mesh, RepeatWrapping } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-import nezuko from "../../assets/nezu.png";
-import toga from "../../assets/toga.jpg";
+import anime from "../../assets/anime.jpg";
 import { appliedForces } from "./helpers";
 
 export type Photo = {
@@ -15,13 +14,14 @@ export type Photo = {
 
 export const Photo = memo(({ x, y, offset = { x: 0, y: 0 } }: Photo) => {
   const { viewport } = useThree();
-  const photos = useTexture(toga);
+  const photos = useTexture(anime);
   const photoMap = useMemo(() => photos.clone(), [photos]);
   photoMap.wrapS = RepeatWrapping;
   photoMap.wrapT = RepeatWrapping;
   photoMap.repeat.set(1 / 6, 1 / 6);
   photoMap.offset.set(offset.x, offset.y);
   const ref = useRef<Mesh>(null);
+
   const [t, setT] = useState(0);
   const direction = useRef<number>();
 
@@ -38,8 +38,8 @@ export const Photo = memo(({ x, y, offset = { x: 0, y: 0 } }: Photo) => {
   });
 
   return (
-    <mesh position-x={x} position-y={y} ref={ref} scale={[1.3, 2, 2]}>
-      <planeBufferGeometry />
+    <mesh position-x={x} position-y={y} ref={ref} scale={[2, 3, 2]}>
+      <planeGeometry />
       <meshBasicMaterial map={photoMap} />
     </mesh>
   );
